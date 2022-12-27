@@ -1,7 +1,5 @@
 from collections import Counter
 
-# comentario para test
-
 
 class SimpleReport:
     @staticmethod
