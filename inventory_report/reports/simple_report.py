@@ -2,8 +2,8 @@ from collections import Counter
 
 
 class SimpleReport:
-    @staticmethod
-    def generate(file):
+    @classmethod
+    def generate(cls, file):
         data_de_fabricacao = [item["data_de_fabricacao"] for item in file]
         data_de_fabricacao.sort()
         data_de_validade = [item["data_de_validade"] for item in file]
