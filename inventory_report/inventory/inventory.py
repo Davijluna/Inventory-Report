@@ -5,6 +5,8 @@ from inventory_report.reports.simple_report import SimpleReport
 import csv
 import json
 import xml.etree.ElementTree as et
+# tree = et.parse('inventory.xml')
+# root = tree.getroot()
 
 
 # REQUISITO 4
@@ -20,7 +22,8 @@ class Inventory:
             return cls.open_json(data, type)
         if 'xml' in data:
             return cls.open_xml(data, type)
-        raise NotImplementedError
+        else:
+            raise ValueError("Arquivo inválido")
 
     @classmethod
     def open_csv(cls, data, type):
@@ -28,7 +31,7 @@ class Inventory:
             result = list(csv.DictReader(file, delimiter=",", quotechar='"'))
         if (type == 'simples'):
             return SimpleReport.generate(list(result))
-        else:
+        elif (type == 'completo'):
             return CompleteReport.generate(list(result))
 
     @classmethod
@@ -37,14 +40,14 @@ class Inventory:
             result = json.load(file)
         if (type == 'simples'):
             return SimpleReport.generate(list(result))
-        else:
+        elif (type == 'completo'):
             return CompleteReport.generate(list(result))
 
     @classmethod
     def open_xml(cls, data, type):
-        with open(data, encoding="utf-8") as file:
-            result = et.parse(file)
+        with open(data) as file:
+            result = et.parse(file.read())['dataset']['record']
         if (type == 'simples'):
             return SimpleReport.generate(list(result))
-        else:
+        elif (type == 'completo'):
             return CompleteReport.generate(list(result))
