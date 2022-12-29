@@ -20,7 +20,7 @@ class Inventory:
             return cls.open_csv(data, type)
         if 'json' in data:
             return cls.open_json(data, type)
-        if 'xml' in data:
+        if '.xml' in data:
             return cls.open_xml(data, type)
         else:
             raise ValueError("Arquivo inválido")
