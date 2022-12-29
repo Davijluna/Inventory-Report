@@ -1,5 +1,5 @@
 from inventory_report.importer.importer import Importer
-import xml.etree.ElementTree as et
+import xmltodict
 
 
 class XmlImporter(Importer):
@@ -7,5 +7,5 @@ class XmlImporter(Importer):
     def import_data(cls, data: str):
         if data.endswith(".xml"):
             with open(data) as XmlFile:
-                return et.parse(XmlFile)
+                return xmltodict.parse(XmlFile)
         raise ValueError("Arquivo inválido")
