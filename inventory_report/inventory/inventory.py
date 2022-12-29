@@ -4,7 +4,7 @@ from inventory_report.reports.simple_report import SimpleReport
 
 import csv
 import json
-import xmltodict as ET
+import xmltodict
 # tree = et.parse('inventory.xml')
 # root = tree.getroot()
 
@@ -46,7 +46,7 @@ class Inventory:
     @classmethod
     def open_xml(cls, data, type):
         with open(data) as file:
-            result = ET.parse(file.read())['dataset']['record']
+            result = xmltodict.parse(file.read())['dataset']['record']
         if (type == 'simples'):
             return SimpleReport.generate(result)
         elif (type == 'completo'):
