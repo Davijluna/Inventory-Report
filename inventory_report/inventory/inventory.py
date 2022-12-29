@@ -4,8 +4,8 @@ from inventory_report.reports.simple_report import SimpleReport
 
 import csv
 import json
-import xml.etree.ElementTree as ET
-# import xmltodict as ET
+# import xml.etree.ElementTree as ET
+import xmltodict as ET
 # tree = et.parse('inventory.xml')
 # root = tree.getroot()
 
@@ -19,9 +19,9 @@ class Inventory:
     def import_data(cls, data, type):
         if 'csv' in data:
             return cls.open_csv(data, type)
-        if 'json' in data:
+        elif 'json' in data:
             return cls.open_json(data, type)
-        if '.xml' in data:
+        elif '.xml' in data:
             return cls.open_xml(data, type)
         else:
             raise ValueError("Arquivo inválido")
