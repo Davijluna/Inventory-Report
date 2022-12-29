@@ -4,7 +4,7 @@ from inventory_report.reports.simple_report import SimpleReport
 
 import csv
 import json
-import xml.etree.ElementTree as et
+import xmltodict as ET
 # tree = et.parse('inventory.xml')
 # root = tree.getroot()
 
@@ -36,18 +36,18 @@ class Inventory:
 
     @classmethod
     def open_json(cls, data, type):
-        with open(data, encoding="utf-8") as file:
+        with open(data, mode="r") as file:
             result = json.load(file)
         if (type == 'simples'):
-            return SimpleReport.generate(list(result))
+            return SimpleReport.generate(result)
         elif (type == 'completo'):
-            return CompleteReport.generate(list(result))
+            return CompleteReport.generate(result)
 
     @classmethod
     def open_xml(cls, data, type):
         with open(data) as file:
-            result = et.parse(file.read())['dataset']['record']
+            result = ET.parse(file.read())['dataset']['record']
         if (type == 'simples'):
-            return SimpleReport.generate(list(result))
+            return SimpleReport.generate(result)
         elif (type == 'completo'):
-            return CompleteReport.generate(list(result))
+            return CompleteReport.generate(result)
