@@ -39,15 +39,15 @@ class Inventory:
         with open(data, mode="r") as file:
             result = json.load(file)
         if (type == 'simples'):
-            return SimpleReport.generate(result)
+            return SimpleReport.generate(list(result))
         elif (type == 'completo'):
-            return CompleteReport.generate(result)
+            return CompleteReport.generate(list(result))
 
     @classmethod
     def open_xml(cls, data, type):
         with open(data) as file:
             result = xmltodict.parse(file.read())['dataset']['record']
         if (type == 'simples'):
-            return SimpleReport.generate(result)
+            return SimpleReport.generate(list(result))
         elif (type == 'completo'):
-            return CompleteReport.generate(result)
+            return CompleteReport.generate(list(result))
