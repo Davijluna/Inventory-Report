@@ -7,5 +7,5 @@ class CsvImporter(Importer):
     def import_data(cls, data: str):
         if data.endswith(".csv"):
             with open(data) as CsvFile:
-                return csv.reader(CsvFile)
+                return csv.reader(CsvFile, delimiter=",", quotechar='"')
         raise ValueError("Arquivo inválido")
