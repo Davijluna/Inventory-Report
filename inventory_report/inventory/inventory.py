@@ -17,11 +17,11 @@ class Inventory:
     @classmethod
     # @abstractmethod
     def import_data(cls, data, type):
-        if 'csv' in data:
+        if '.csv' in data:
             return cls.open_csv(data, type)
         elif 'json' in data:
             return cls.open_json(data, type)
-        elif '.xml' in data:
+        elif 'xml' in data:
             return cls.open_xml(data, type)
         else:
             raise ValueError("Arquivo inválido")
@@ -40,9 +40,9 @@ class Inventory:
         with open(data, mode="r") as file:
             result = json.load(file)
         if (type == 'simples'):
-            return SimpleReport.generate(list(result))
+            return SimpleReport.generate(result)
         elif (type == 'completo'):
-            return CompleteReport.generate(list(result))
+            return CompleteReport.generate(result)
 
     @classmethod
     # def open_xml(cls, data, type):
@@ -61,7 +61,7 @@ class Inventory:
             result = ET.parse(file.read())['dataset']['record']
         if (type == 'simples'):
             # return SimpleReport.generate(result)
-            return SimpleReport.generate(list(result))
+            return SimpleReport.generate(result)
         elif (type == 'completo'):
             # return CompleteReport.generate(result)
-            return CompleteReport.generate(list(result))
+            return CompleteReport.generate(result)
